@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leizeng.pay.mapper.PayCallbackMapper">
+
+    <insert id="addPayCallback" parameterType="com.leizeng.pay.entity.PayCallback" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pay_callback_tb(
+            appid,
+            mch_id,
+            nonce_str,
+            sign,
+            openid,
+            trade_type,
+            total_fee,
+            transaction_id,
+            out_trade_no,
+            time_end
+        ) VALUES (
+            #{appid},
+            #{mchId},
+            #{nonceStr},
+            #{sign},
+            #{openid},
+            #{tradeType},
+            #{totalFee},
+            #{transactionId},
+            #{outTradeNo},
+            #{timeEnd}
+        )
+    </insert>
+
+</mapper>

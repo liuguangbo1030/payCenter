@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leizeng.pay.mapper.WxOpenidMapper">
+
+    <sql id="columns">
+        id AS id,
+        carnumber AS carnumber,
+        appid AS appid,
+        openid AS openid,
+        createtime AS createtime
+    </sql>
+
+    <insert id="addWxOpenid" parameterType="com.leizeng.pay.entity.WxOpenid" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pay_tb(
+            carnumber,
+            appid,
+            openid,
+            createtime
+        ) VALUES (
+            #{carnumber},
+            #{appid},
+            #{openid},
+            #{createtime}
+        )
+    </insert>
+
+    <select id="findWxOpenid" parameterType="java.util.Map" resultType="com.leizeng.pay.entity.WxOpenid">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            wx_openid_tb
+        <where>
+            <if test="carnumber != null">
+                AND carnumber = #{carnumber}
+            </if>
+            <if test="appid != null">
+                AND appid = #{appid}
+            </if>
+        </where>
+        LIMIT 1
+    </select>
+
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leizeng.pay.mapper.PayMapper">
+
+    <sql id="columns">
+        id AS id,
+        pay_id AS payId,
+        order_id AS orderId,
+        amount AS amount,
+        product_name AS productName,
+        pay_type AS payType,
+        pay_status AS payStatus,
+        created_id AS createdId,
+        created_at AS createdAt
+    </sql>
+
+    <insert id="addPay" parameterType="com.leizeng.pay.entity.Pay" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO pay_tb(
+            <if test="orderId!=null and orderId!=''">
+                order_id,
+            </if>
+            <if test="amount!=null and amount!=''">
+                amount,
+            </if>
+            <if test="productName!=null and productName!=''">
+                product_name,
+            </if>
+            <if test="payType!=null and payType!=''">
+                pay_type,
+            </if>
+            <if test="createdId!=null and createdId!=''">
+                created_id,
+            </if>
+            pay_status,
+            pay_id
+        ) VALUES (
+            <if test="orderId!=null and orderId!=''">
+                #{orderId},
+            </if>
+            <if test="amount!=null and amount!=''">
+                #{amount},
+            </if>
+            <if test="productName!=null and productName!=''">
+                #{productName},
+            </if>
+            <if test="payType!=null and payType!=''">
+                #{payType},
+            </if>
+            <if test="createdId!=null and createdId!=''">
+                #{createdId},
+            </if>
+            #{payStatus},
+            #{payId}
+        )
+    </insert>
+
+    <update id="updatePayByPayId" parameterType="com.leizeng.pay.entity.Pay">
+        UPDATE
+            pay_tb
+        SET
+            <if test="orderId!=null and orderId!=''">
+                order_id = #{orderId},
+            </if>
+            <if test="amount!=null and amount!=''">
+                amount = #{amount},
+            </if>
+            <if test="productName!=null and productName!=''">
+                product_name = #{productName},
+            </if>
+            <if test="payType!=null and payType!=''">
+                pay_type = #{payType},
+            </if>
+            <if test="createdId!=null and createdId!=''">
+                created_d = #{createdId},
+            </if>
+            <if test="payStatus!=null and payStatus!=''">
+                pay_status = #{payStatus},
+            </if>
+            <if test="payId!=null and payId!=''">
+                pay_id = #{payId}
+            </if>
+        WHERE
+            pay_id = #{payId}
+    </update>
+
+    <select id="findPayByPayid" resultType="com.leizeng.pay.entity.Pay">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            pay_tb
+        WHERE
+            pay_id = #{payId}
+        LIMIT 1
+    </select>
+
+</mapper>

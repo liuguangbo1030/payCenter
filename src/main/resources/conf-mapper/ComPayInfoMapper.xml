@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leizeng.pay.mapper.ComPayInfoMapper">
+
+    <sql id="columns">
+        id AS id,
+        comid AS comid,
+        appid AS appid,
+        mch_id AS mchId,
+        `key` AS `key`,
+        type AS type
+    </sql>
+
+    <select id="findComPayInfoByComid" resultType="com.leizeng.pay.entity.ComPayInfo">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            com_pay_info_tb
+        <where>
+            <if test="comid != null">
+                AND comid = #{comid}
+            </if>
+            <if test="type != null">
+                AND type = #{type}
+            </if>
+        </where>
+        LIMIT 1
+    </select>
+
+</mapper>

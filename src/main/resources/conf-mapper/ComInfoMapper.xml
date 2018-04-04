@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.leizeng.pay.mapper.ComInfoMapper">
+
+    <sql id="columns">
+        id AS id,
+        company_name AS companyName,
+        address AS address
+    </sql>
+
+    <select id="findComInfoById" resultType="com.leizeng.pay.entity.ComInfo">
+        SELECT
+            <include refid="columns"/>
+        FROM
+            com_info_tb
+        WHERE
+            id = #{id}
+        LIMIT 1
+    </select>
+
+</mapper>

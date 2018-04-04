@@ -1,0 +1,10 @@
+errorCode:
+    list:
+        - code: 0
+          message: success
+        - code: 1
+          message: failure
+        - code: 90001
+          message: 请求参数不合法
+        - code: 90002
+          message: 短信模板不存在
